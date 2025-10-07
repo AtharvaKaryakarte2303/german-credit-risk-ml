@@ -1,4 +1,4 @@
-# 🇩🇪 German Credit Risk Prediction
+# German Credit Risk Prediction
 
 ### 🧠 Project Overview
 
@@ -110,7 +110,7 @@ GermanCreditRiskPrediction/
 ### 👤 Author
 
 **Atharva Anirudha Karyakarte**
-📧 [Mail]akaryakarte12@gmail.com
+📧 [Mail](akaryakarte12@gmail.com)
 🔗 [LinkedIn](https://www.linkedin.com/in/atharva-karyakarte)
 
 ---
