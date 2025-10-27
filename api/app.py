@@ -1,20 +1,31 @@
 from fastapi import FastAPI
+import numpy as np
 from model_loader import load_model
 from schemas import CreditData
-import pandas as pd
 
-app = FastAPI(title="German Credit Risk Prediction API")
+# Initialize app
+app = FastAPI(title="German Credit Risk Prediction API", version="1.0")
 
+# Load model and scaler
 model, scaler = load_model()
 
 @app.get("/")
-def home():
-    return {"message": "German Credit Risk API is running 🚀"}
+def root():
+    return {"message": "German Credit Risk Prediction API is running successfully!"}
 
 @app.post("/predict")
-def predict_credit(data: CreditData):
-    df = pd.DataFrame([data.dict()])
-    df_scaled = scaler.transform(df)
-    pred = model.predict(df_scaled)
-    result = "Good Credit" if int(pred[0]) == 1 else "Bad Credit"
-    return {"prediction": result}
+def predict(data: CreditData):
+    # Convert input data to numpy array
+    input_data = np.array([list(data.dict().values())])
+
+    # Scale the input data
+    input_scaled = scaler.transform(input_data)
+
+    # Predict
+    prediction = model.predict(input_scaled)[0]
+    result = "Good Credit" if prediction == 1 else "Bad Credit"
+
+    # Confidence score
+    confidence = round(float(np.max(model.predict_proba(input_scaled))), 2)
+
+    return {"prediction": result, "confidence": confidence}
