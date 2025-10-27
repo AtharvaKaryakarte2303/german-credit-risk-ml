@@ -1,13 +1,11 @@
-import pickle
+import joblib
 import os
 
+MODEL_PATH = os.path.join("models", "xgb.joblib")
+SCALER_PATH = os.path.join("models", "scaler.joblib")
+
 def load_model():
-    model_path = os.path.join(os.path.dirname(__file__), "../models/xgb_model.pkl")
-    scaler_path = os.path.join(os.path.dirname(__file__), "../models/scaler.pkl")
-
-    with open(model_path, "rb") as f:
-        model = pickle.load(f)
-    with open(scaler_path, "rb") as f:
-        scaler = pickle.load(f)
-
+    """Load trained model and scaler."""
+    model = joblib.load(MODEL_PATH)
+    scaler = joblib.load(SCALER_PATH)
     return model, scaler
