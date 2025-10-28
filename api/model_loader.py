@@ -7,7 +7,7 @@ def load_model():
     models_dir = os.path.join(base_dir, "..", "models")  # Go up one level
 
     # Model paths
-    model_path = os.path.join(models_dir, "model.joblib")
+    model_path = os.path.join(models_dir, "xgb.joblib")
     scaler_path = os.path.join(models_dir, "scaler.joblib")
 
     # Load model and scaler
