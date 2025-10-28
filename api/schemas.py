@@ -1,15 +1,22 @@
 from pydantic import BaseModel
 
 class CreditData(BaseModel):
-    duration: float
+    duration_in_month: float
     credit_amount: float
+    installment_rate: float
     age: float
-    checking_status_A11: int
-    checking_status_A12: int
-    checking_status_A13: int
-    savings_status_A61: int
-    savings_status_A62: int
-    savings_status_A63: int
-    employment_A71: int
-    employment_A72: int
-    employment_A73: int
+    existing_credits: int
+    num_dependents: int
+    checking_account_status: str
+    savings_account_status: str
+    credit_history: str
+    purpose: str
+    employment: str
+    personal_status: str
+    other_debtors: str
+    property: str
+    other_installment_plans: str
+    housing: str
+    job: str
+    telephone: str
+    foreign_worker: str
