@@ -9,18 +9,28 @@ model, scaler, label_encoders = load_model()
 
 @app.post("/predict")
 def predict_credit(data: CreditData):
-    df = pd.DataFrame([data.dict()])
+    try:
+        df = pd.DataFrame([data.dict()])
 
-    # Apply label encoding to categorical columns
-    for col, le in label_encoders.items():
-        if col in df.columns:
-            df[col] = le.transform(df[col])
+        # Ensure columns are in the same order as during training
+        expected_cols = list(label_encoders.keys()) + [
+            col for col in df.columns if col not in label_encoders
+        ]
+        df = df[expected_cols]
 
-    # Scale the input
-    df_scaled = scaler.transform(df)
+        # Apply label encoding safely
+        for col, le in label_encoders.items():
+            if col in df.columns:
+                try:
+                    df[col] = le.transform(df[col])
+                except ValueError:
+                    df[col] = le.transform([le.classes_[0]])
 
-    # Predict
-    pred = model.predict(df_scaled)[0]
-    result = "Good Credit" if int(pred) == 1 else "Bad Credit"
+        df_scaled = scaler.transform(df)
+        pred = model.predict(df_scaled)[0]
+        result = "Good Credit" if int(pred) == 1 else "Bad Credit"
 
-    return {"prediction": result}
+        return {"prediction": result}
+
+    except Exception as e:
+        return {"error": str(e)}
