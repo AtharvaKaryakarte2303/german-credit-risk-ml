@@ -17,15 +17,39 @@ def root():
 @app.post("/predict")
 def predict_credit(data: CreditData):
     try:
+        # Convert request data to DataFrame
         df = pd.DataFrame([data.dict()])
-        print("Incoming DataFrame:\n", df)
 
+        # Rename columns to match model's training feature names
+        rename_map = {
+            "duration_in_month": "Duration",
+            "credit_amount": "Credit Amount",
+            "installment_rate": "Installment Rate",
+            "age": "Age",
+            "existing_credits": "Existing Credits",
+            "num_dependents": "Number of Dependents",
+            "checking_account_status": "Checking Account",
+            "savings_account_status": "Savings Account",
+            "credit_history": "Credit History",
+            "purpose": "Purpose",
+            "employment": "Employment Duration",
+            "personal_status": "Personal Status and Sex",
+            "other_debtors": "Other Debtors / Guarantors",
+            "property": "Property",
+            "other_installment_plans": "Other Installment Plans",
+            "housing": "Housing",
+            "job": "Job",
+            "telephone": "Telephone",
+            "foreign_worker": "Foreign Worker"
+        }
+
+        df.rename(columns=rename_map, inplace=True)
+
+        # Scale and predict
         df_scaled = scaler.transform(df)
-        print("Scaled DataFrame:\n", df_scaled)
-
         pred = model.predict(df_scaled)
-        result = "Good Credit" if int(pred[0]) == 1 else "Bad Credit"
 
+        result = "Good Credit" if int(pred[0]) == 1 else "Bad Credit"
         return {"prediction": result}
 
     except Exception as e:
