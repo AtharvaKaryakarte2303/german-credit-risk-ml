@@ -17,9 +17,6 @@ def root():
 @app.post("/predict")
 def predict_credit(data: CreditData):
     try:
-        # Convert request data to DataFrame
-        df = pd.DataFrame([data.dict()])
-
         # Rename columns to match model's training feature names
         rename_map = {
             "duration_in_month": "Duration",
@@ -43,11 +40,16 @@ def predict_credit(data: CreditData):
             "foreign_worker": "Foreign_Worker",
             "present_residence_since": "Present Residence Since"
         }
-
-        df.rename(columns=rename_map, inplace=True)
-
-        # Scale and predict
+        
+       df = pd.DataFrame([data.dict()])
+        df = df.rename(columns=rename_map)
+        
+        # Reorder columns to match training
+        expected_features = list(scaler.feature_names_in_)  # scaler remembers the order
+        df = df[expected_features]
+        
         df_scaled = scaler.transform(df)
+
         pred = model.predict(df_scaled)
 
         result = "Good Credit" if int(pred[0]) == 1 else "Bad Credit"
