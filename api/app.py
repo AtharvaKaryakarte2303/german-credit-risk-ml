@@ -41,7 +41,7 @@ def predict_credit(data: CreditData):
             "present_residence_since": "Present Residence Since"
         }
         
-       df = pd.DataFrame([data.dict()])
+        df = pd.DataFrame([data.dict()])
         df = df.rename(columns=rename_map)
         
         # Reorder columns to match training
