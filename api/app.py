@@ -27,20 +27,21 @@ def predict_credit(data: CreditData):
             "installment_rate": "Installment Rate",
             "age": "Age",
             "existing_credits": "Existing Credits",
-            "num_dependents": "Number of Dependents",
+            "num_dependents": "Liable Maintaince Provider",
             "checking_account_status": "Checking Account",
             "savings_account_status": "Savings Account",
             "credit_history": "Credit History",
             "purpose": "Purpose",
-            "employment": "Employment Duration",
+            "employment": "Present Employment Since",
             "personal_status": "Personal Status and Sex",
-            "other_debtors": "Other Debtors / Guarantors",
+            "other_debtors": "Other Debtors",
             "property": "Property",
             "other_installment_plans": "Other Installment Plans",
             "housing": "Housing",
             "job": "Job",
             "telephone": "Telephone",
-            "foreign_worker": "Foreign Worker"
+            "foreign_worker": "Foreign_Worker",
+            "present_residence_since": "Present Residence Since"
         }
 
         df.rename(columns=rename_map, inplace=True)
