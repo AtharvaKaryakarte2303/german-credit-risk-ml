@@ -2,6 +2,7 @@ from fastapi import FastAPI
 import numpy as np
 from model_loader import load_model
 from schemas import CreditData
+import panadas as pd
 
 # Initialize app
 app = FastAPI(title="German Credit Risk Prediction API", version="1.0")
