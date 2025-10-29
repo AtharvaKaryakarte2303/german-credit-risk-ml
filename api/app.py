@@ -14,18 +14,19 @@ def root():
     return {"message": "German Credit Risk Prediction API is running successfully!"}
 
 @app.post("/predict")
-def predict(data: CreditData):
-    # Convert input data to numpy array
-    input_data = np.array([list(data.dict().values())])
+def predict_credit(data: CreditData):
+    try:
+        df = pd.DataFrame([data.dict()])
+        print("Incoming DataFrame:\n", df)
 
-    # Scale the input data
-    input_scaled = scaler.transform(input_data)
+        df_scaled = scaler.transform(df)
+        print("Scaled DataFrame:\n", df_scaled)
 
-    # Predict
-    prediction = model.predict(input_scaled)[0]
-    result = "Good Credit" if prediction == 1 else "Bad Credit"
+        pred = model.predict(df_scaled)
+        result = "Good Credit" if int(pred[0]) == 1 else "Bad Credit"
 
-    # Confidence score
-    confidence = round(float(np.max(model.predict_proba(input_scaled))), 2)
+        return {"prediction": result}
 
-    return {"prediction": result, "confidence": confidence}
+    except Exception as e:
+        print("❌ ERROR:", e)
+        return {"error": str(e)}
