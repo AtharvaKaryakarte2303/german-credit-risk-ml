@@ -34,7 +34,7 @@ def predict_credit(data: CreditData):
             "credit_history": "Credit History",
             "purpose": "Purpose",
             "employment": "Present Employment Since",
-            "personal_status": "Personal Status & Sex",
+            "personal_status": "Personal Status and Sex",
             "other_debtors": "Other Debtors",
             "property": "Property",
             "other_installment_plans": "Other Installment Plans",
