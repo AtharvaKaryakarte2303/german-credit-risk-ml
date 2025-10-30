@@ -8,7 +8,7 @@ from schemas import CreditData
 app = FastAPI(title="German Credit Risk Prediction API", version="1.0")
 
 # Load trained model, scaler, and label encoders
-model, scaler, label_encoders = load_model()
+model, scaler, le = load_model()
 
 @app.get("/")
 def root():
@@ -60,6 +60,11 @@ def predict_credit(data: CreditData):
         print("🔹 Input sample:")
         print(df.head())
 
+         # Apply label encoding to categorical columns
+        for col in df.columns:
+            if (df[col].dtype == "object"):
+                df[col] = le.transform(df[col])
+            
         # Scale and predict
         df_scaled = scaler.transform(df)
         pred = model.predict(df_scaled)[0]
