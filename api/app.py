@@ -23,26 +23,26 @@ def predict_credit(data: CreditData):
 
         # Rename columns to match the model training feature names
         rename_map = {
-            "duration_in_month": "Duration",
-            "credit_amount": "Credit Amount",
-            "installment_rate": "Installment Rate",
-            "age": "Age",
-            "existing_credits": "Existing Credits",
-            "num_dependents": "Liable Maintaince Provider",
             "checking_account_status": "Checking Account",
-            "savings_account_status": "Savings Account",
+            "duration_in_month": "Duration",
             "credit_history": "Credit History",
+            "credit_amount": "Credit Amount",
             "purpose": "Purpose",
+            "savings_account_status": "Savings Account",
             "employment": "Present Employment Since",
+            "installment_rate": "Installment Rate",
             "personal_status": "Personal Status and Sex",
             "other_debtors": "Other Debtors",
+            "present_residence_since": "Present Residence Since",
             "property": "Property",
+            "age": "Age",
             "other_installment_plans": "Other Installment Plans",
-            "housing": "Housing",
+             "housing": "Housing",
+            "existing_credits": "Existing Credits",
             "job": "Job",
+            "num_dependents": "Liable Maintaince Provider",
             "telephone": "Telephone",
-            "foreign_worker": "Foreign_Worker",
-            "present_residence_since": "Present Residence Since"
+            "foreign_worker": "Foreign_Worker"            
         }
 
         df.rename(columns=rename_map, inplace=True)
