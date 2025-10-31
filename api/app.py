@@ -68,9 +68,12 @@ def predict_credit(data: CreditData):
         # Scale and predict
         df_scaled = scaler.transform(df)
         pred = model.predict(df_scaled)[0]
+        pred_proba = model.predict_proba(df_scaled)
+
+        confidence = round(float(max(pred_proba[0])) * 100, 2)
         result = "Good Credit" if int(pred) == 1 else "Bad Credit"
 
-        return {"prediction": result}
+        return {"Prediction": result, "Confidence": f"{confidence}%"}
 
     except Exception as e:
         print("❌ ERROR:", str(e))
