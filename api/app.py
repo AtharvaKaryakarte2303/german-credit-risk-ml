@@ -66,8 +66,8 @@ def predict_credit(data: CreditData):
         df_scaled = scaler.transform(df)
         pred = model.predict(df_scaled)[0]
         pred_proba = model.predict_proba(df_scaled)[0]
-        good_prob = probs[0]
-        bad_prob = probs[1]
+        good_prob = pred_proba[0]
+        bad_prob = pred_proba[1]
 
         confidence = round(float(max(pred_proba[0])) * 100, 2)
         result = "Good Credit" if good_prob >= bad_prob else "Bad Credit"
