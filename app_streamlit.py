@@ -5,6 +5,7 @@ import joblib
 
 model = joblib.load("models/xgb.joblib")
 scaler = joblib.load("models/scaler.joblib")
+le = joblib.load("models/Label_Encoder.joblib")
 
 st.title("💳 German Credit Risk Prediction App")
 st.write("Predict whether a loan applicant has **Good Credit** or **Bad Credit**")
@@ -45,6 +46,10 @@ input_data = pd.DataFrame([[
 ])
 
 if st.button("🔍 Predict Credit Risk"):
+    for col in df.columns:
+            if (df[col].dtype == "object"):
+                df[col] = le.fit_transform(df[col])
+                
     input_scaled = scaler.transform(input_data)
     prediction = model.predict(input_scaled)[0]
     confidence = np.max(model.predict_proba(input_scaled)) * 100
