@@ -46,9 +46,9 @@ input_data = pd.DataFrame([[
 ])
 
 if st.button("🔍 Predict Credit Risk"):
-    for col in df.columns:
-            if (df[col].dtype == "object"):
-                df[col] = le.fit_transform(df[col])
+    for col in input_data.columns:
+            if (input_data[col].dtype == "object"):
+                input_data[col] = le.fit_transform(input_data[col])
                 
     input_scaled = scaler.transform(input_data)
     prediction = model.predict(input_scaled)[0]
