@@ -56,9 +56,6 @@ def predict_credit(data: CreditData):
             "Job", "Liable Maintaince Provider", "Telephone", "Foreign_Worker"
         ]
         df = df[model_columns]
-        print("🔹 Final column order:", df.columns.tolist())
-        print("🔹 Input sample:")
-        print(df.head())
 
          # Apply label encoding to categorical columns
         for col in df.columns:
@@ -68,10 +65,12 @@ def predict_credit(data: CreditData):
         # Scale and predict
         df_scaled = scaler.transform(df)
         pred = model.predict(df_scaled)[0]
-        pred_proba = model.predict_proba(df_scaled)
+        pred_proba = model.predict_proba(df_scaled)[0]
+        good_prob = probs[0]
+        bad_prob = probs[1]
 
         confidence = round(float(max(pred_proba[0])) * 100, 2)
-        result = "Good Credit" if int(pred) == 1 else "Bad Credit"
+        result = "Good Credit" if good_prob >= bad_prob else "Bad Credit"
 
         return {"Prediction": result, "Confidence": f"{confidence}%"}
 
