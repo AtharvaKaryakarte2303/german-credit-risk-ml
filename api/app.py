@@ -58,7 +58,7 @@ def predict_credit(data: CreditData):
         df = df[model_columns]
 
          # Apply label encoding to categorical columns
-         for col in df.columns:
+        for col in df.columns:
             if (df[col].dtype == "object"):
                 df[col] = le.fit_transform(df[col])
 
@@ -75,6 +75,8 @@ def predict_credit(data: CreditData):
         confidence = max(good_prob, bad_prob) * 100
     
         return {
+            "Good Proability":good_proba,
+            "Bad Proability":bad_proba,
             "Prediction": prediction,
             "Confidence": f"{confidence:.2f}%"
         }
