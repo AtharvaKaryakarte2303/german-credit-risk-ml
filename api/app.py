@@ -9,6 +9,12 @@ app = FastAPI(title="German Credit Risk Prediction API", version="1.0")
 
 # Load trained model, scaler, and label encoders
 model, scaler, le = load_model()
+print("✅ Model, Scaler and Label Encoder loaded successfully!")
+print("🔍 Label encoder type:", type(le))
+if isinstance(le, dict):
+    print("🔍 Label encoder keys:", list(le.keys()))
+else:
+    print("⚠️ Label encoder is NOT a dict!")
 
 @app.get("/")
 def root():
