@@ -9,7 +9,7 @@ def load_model():
     # Model paths
     model_path = os.path.join(models_dir, "xgb.joblib")
     scaler_path = os.path.join(models_dir, "scaler.joblib")
-    encoder_path = os.path.join(models_dir, "LabelEncoder.joblib")
+    encoder_path = os.path.join(models_dir, "LabelEncoders.joblib")
 
     # Load model and scaler
     model = joblib.load(model_path)
