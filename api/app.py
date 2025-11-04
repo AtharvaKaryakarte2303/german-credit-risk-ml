@@ -72,9 +72,15 @@ def predict_credit(data: CreditData):
                     if x in encoder.classes_ else -1
                 )
 
+        print("🔹 DataFrame before scaling:\n", df.head())
+        print("🔹 DataFrame dtypes:\n", df.dtypes)
+        print("🔹 Shape:", df.shape)
+
         # Scale input
         df_scaled = scaler.transform(df)
-    
+
+        print("✅ Scaling done. Shape:", df_scaled.shape)
+
         # Predict probabilities
         probs = model.predict_proba(df_scaled)[0]
         good_prob = probs[0]
