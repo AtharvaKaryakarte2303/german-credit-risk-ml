@@ -60,7 +60,7 @@ def predict_credit(data: CreditData):
          # Apply label encoding to categorical columns
         for col in df.columns:
             if (df[col].dtype == "object"):
-                df[col] = le.fit_transform(df[col])
+                df[col] = le[col].transform(df[col])
 
         # Scale input
         df_scaled = scaler.transform(df)
