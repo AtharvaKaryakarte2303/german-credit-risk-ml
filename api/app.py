@@ -59,9 +59,11 @@ def predict_credit(data: CreditData):
 
          # Apply label encoding to categorical columns
         for col in df.columns:
-            if col in le and df[col].dtype == "object":
+            if col in le:  # le is your labelEncoderDict loaded from joblib
+                encoder = le[col]
                 df[col] = df[col].apply(
-                    lambda x: le[col].transform([x])[0] if x in le[col].classes_ else -1
+                    lambda x: encoder.transform([x])[0]
+                    if x in encoder.classes_ else -1
                 )
 
         # Scale input
