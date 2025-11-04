@@ -75,8 +75,8 @@ def predict_credit(data: CreditData):
         confidence = max(good_prob, bad_prob) * 100
     
         return {
-            "Good Proability":good_proba,
-            "Bad Proability":bad_proba,
+            "Good Proability":good_prob,
+            "Bad Proability":bad_prob,
             "Prediction": prediction,
             "Confidence": f"{confidence:.2f}%"
         }
