@@ -25,9 +25,11 @@ def root():
 def predict_credit(data: CreditData):
     import traceback
     try:
+        print("\n🚀 Incoming request data:", data.dict())
         df = pd.DataFrame([data.dict()])
-        print("🔹 Raw input columns:", df.columns.tolist())
+        print("🔹 Step 1: Raw DataFrame created:", df.shape)
 
+        # Rename columns
         rename_map = {
             "checking_account_status": "Checking Account",
             "duration_in_month": "Duration",
@@ -52,7 +54,7 @@ def predict_credit(data: CreditData):
         }
 
         df.rename(columns=rename_map, inplace=True)
-        print("🔹 Renamed columns:", df.columns.tolist())
+        print("🔹 Step 2: Columns renamed:", df.columns.tolist())
 
         model_columns = [
             "Checking Account", "Duration", "Credit History", "Purpose", "Credit Amount",
@@ -61,42 +63,46 @@ def predict_credit(data: CreditData):
             "Property", "Age", "Other Installment Plans", "Housing", "Existing Credits",
             "Job", "Liable Maintaince Provider", "Telephone", "Foreign_Worker"
         ]
+
         df = df[model_columns]
+        print("🔹 Step 3: Columns reordered successfully")
 
-         # Apply label encoding to categorical columns
+        # Label encoding
         for col in df.columns:
-            if col in le:  # le is your labelEncoderDict loaded from joblib
+            if col in le:
                 encoder = le[col]
-                df[col] = df[col].apply(
-                    lambda x: encoder.transform([x])[0]
-                    if x in encoder.classes_ else -1
-                )
-
-        print("🔹 DataFrame before scaling:\n", df.head())
-        print("🔹 DataFrame dtypes:\n", df.dtypes)
-        print("🔹 Shape:", df.shape)
+                try:
+                    df[col] = df[col].apply(
+                        lambda x: encoder.transform([x])[0]
+                        if x in encoder.classes_ else -1
+                    )
+                except Exception as err:
+                    print(f"⚠️ Encoding failed for column '{col}' with value '{df[col].iloc[0]}' — {err}")
+        
+        print("🔹 Step 4: Encoding complete\n", df.head())
 
         # Scale input
         df_scaled = scaler.transform(df)
+        print("🔹 Step 5: Scaling complete. Shape:", df_scaled.shape)
 
-        print("✅ Scaling done. Shape:", df_scaled.shape)
-
-        # Predict probabilities
+        # Predict
         probs = model.predict_proba(df_scaled)[0]
-        good_prob = probs[0]
-        bad_prob = probs[1]
-    
-        # Determine class
+        print("🔹 Step 6: Model prediction successful:", probs)
+
+        good_prob, bad_prob = probs[0], probs[1]
         prediction = "Good Credit" if good_prob >= bad_prob else "Bad Credit"
         confidence = max(good_prob, bad_prob) * 100
-    
+
+        print("✅ Step 7: Final Prediction:", prediction, confidence)
         return {
-            "Good Proability":good_prob,
-            "Bad Proability":bad_prob,
+            "Good Probability": float(good_prob),
+            "Bad Probability": float(bad_prob),
             "Prediction": prediction,
             "Confidence": f"{confidence:.2f}%"
         }
+
     except Exception as e:
         print("❌ ERROR:", str(e))
         print(traceback.format_exc())
         return {"error": str(e)}
+
