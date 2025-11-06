@@ -1,0 +1,5 @@
+{
+  "name": "german-credit-risk-api",
+  "runtime": "python3.9",
+  "entrypoint": "main:app"
+}
