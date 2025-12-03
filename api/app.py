@@ -2,7 +2,7 @@ from fastapi import FastAPI
 import pandas as pd
 import numpy as np
 from api.model_loader import load_model
-from schemas import CreditData
+from api.schemas import CreditData
 
 # Initialize FastAPI
 app = FastAPI(title="German Credit Risk Prediction API", version="1.0")
