@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 import pandas as pd
 import numpy as np
-from model_loader import load_model
+from api.model_loader import load_model
 from schemas import CreditData
 
 # Initialize FastAPI
