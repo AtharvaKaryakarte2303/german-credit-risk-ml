@@ -3,8 +3,11 @@
 This system classifies customers as Good Credit or Bad Credit, with probability scores to support:
 
 Loan approval workflows
+
 Customer risk evaluation
+
 Automated underwriting
+
 Transparent, explainable decisions
 
 # 🚀 Live Demo
@@ -15,42 +18,63 @@ Transparent, explainable decisions
 # 🧠 Key Features
 
 Data Pipeline
+
 Clean preprocessing flow
+
 Label encoding
+
 Numerical scaling
+
 Handling imbalance & outliers
+
 ML Model Training
 
 ## Models evaluated:
 
 Logistic Regression
+
 Random Forest
+
 XGBoost
+
 LightGBM
+
 Includes:
 
 Hyperparameter tuning
+
 Model comparison
+
 Final model export
+
 Explainability
+
 SHAP summary plots
+
 Local prediction explanations
+
 Feature importance ranking
 
 ## Deployment
 
 FastAPI REST API
+
 Hosted on Render
+
 Real-time JSON prediction
 
 # 📈 Model Performance
 
 Metric	Score
+
 Accuracy	~82%
+
 ROC-AUC	~0.88
+
 F1 Score	Balanced
 
 # 🧪 API Example
+
 Request
 {
   "checking_account_status": "A11",
