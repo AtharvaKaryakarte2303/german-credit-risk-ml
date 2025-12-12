@@ -187,8 +187,11 @@ uvicorn api.main:app --reload
 This system helps lenders:
 
 Reduce default rates
+
 Score applicants more accurately
+
 Approve loans faster
+
 Maintain transparent, auditable decisions
 
 # 🧑‍💻 Author
