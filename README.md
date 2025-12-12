@@ -194,7 +194,9 @@ Maintain transparent, auditable decisions
 # 🧑‍💻 Author
 
 Atharva Anirudha Karyakarte
+
 ML Engineer — Finance & Risk Modeling
+
 📧 atharva.karyakarte@gmail.com
 
 🔗 LinkedIn: https://linkedin.com/in/atharvakaryakarte
