@@ -104,16 +104,23 @@ Request
 ## Checking Account Status
 
 A11: Little/No Money
+
 A12: Low Balance
+
 A13: Good Standing
+
 A14: No Checking Account
 
 ## Credit History
 
 A30: No Credits / All Paid Back
+
 A31: Previous Credits Paid Duly
+
 A32: Existing Credits Paid Until Now
+
 A33: Past Payment Delays
+
 A34: Critical / Other Issues
 
 ## Purpose
@@ -122,17 +129,25 @@ A40–A410 represent loan purpose (Car, Furniture, TV, Appliances, Repairs, Educ
 ## Savings Account Status
 
 A61: Very Low/No Savings
+
 A62: Small
+
 A63: Moderate
+
 A64: Good
+
 A65: High
 
 ## Employment Duration
 
 A71: Unemployed
+
 A72: < 1 Year
+
 A73: 1–4 Years
+
 A74: 4–7 Years
+
 A75: > 7 Years
 
 ## Personal Status
@@ -143,26 +158,35 @@ A91–A95: Married, Single, Divorced, etc.
 ## Other Debtors
 
 A101: None
+
 A102: Co-Applicant
+
 A103: Guarantor
 
 ## Other Installment Plans
 
 A141: Bank
+
 A142: Stores
+
 A143: None
 
 ## Housing
 
 A151: Rent
+
 A152: Owned
+
 A153: Free / Provided
 
 ## Job Type
 
 A171: Unskilled (Non-Resident)
+
 A172: Unskilled (Resident)
+
 A173: Skilled Employee
+
 A174: Highly Skilled / Self-Employed
 
 ## Telephone: 
@@ -172,6 +196,7 @@ A191 (None), A192 (Has Phone)
 A201 (Yes), A202 (No)
 
 ## Response
+
 {
   "prediction": "Good Credit",
   "probability_good": 0.87,
