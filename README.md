@@ -1,73 +1,56 @@
-📌 Overview
+# 📌 Overview
 
 This system classifies customers as Good Credit or Bad Credit, with probability scores to support:
 
 Loan approval workflows
-
 Customer risk evaluation
-
 Automated underwriting
-
 Transparent, explainable decisions
 
-🚀 Live Demo
+# 🚀 Live Demo
 
-Backend API (FastAPI):
+## Backend API (FastAPI):
 🔗 https://german-credit-risk-ml.onrender.com/docs
 
-🧠 Key Features
+# 🧠 Key Features
+
 Data Pipeline
-
 Clean preprocessing flow
-
 Label encoding
-
 Numerical scaling
-
 Handling imbalance & outliers
-
 ML Model Training
 
-Models evaluated:
+## Models evaluated:
 
 Logistic Regression
-
 Random Forest
-
 XGBoost
-
 LightGBM
-
 Includes:
 
 Hyperparameter tuning
-
 Model comparison
-
 Final model export
-
 Explainability
-
 SHAP summary plots
-
 Local prediction explanations
-
 Feature importance ranking
 
-Deployment
+## Deployment
 
 FastAPI REST API
-
 Hosted on Render
-
 Real-time JSON prediction
 
-📈 Model Performance
+# 📈 Model Performance
+
 Metric	Score
 Accuracy	~82%
 ROC-AUC	~0.88
 F1 Score	Balanced
-🧪 API Example
+
+# 🧪 API Example
 Request
 {
   "checking_account_status": "A11",
@@ -92,108 +75,87 @@ Request
   "foreign_worker": "A201"
 }
 
-Feature Code Meanings (Simplified for Clients)
+# Feature Code Meanings (Simplified for Clients)
 
-Checking Account Status
+## Checking Account Status
 
 A11: Little/No Money
-
 A12: Low Balance
-
 A13: Good Standing
-
 A14: No Checking Account
 
-Credit History
+## Credit History
 
 A30: No Credits / All Paid Back
-
 A31: Previous Credits Paid Duly
-
 A32: Existing Credits Paid Until Now
-
 A33: Past Payment Delays
-
 A34: Critical / Other Issues
 
-Purpose
+## Purpose
 A40–A410 represent loan purpose (Car, Furniture, TV, Appliances, Repairs, Education, Business, etc.)
 
-Savings Account Status
+## Savings Account Status
 
 A61: Very Low/No Savings
-
 A62: Small
-
 A63: Moderate
-
 A64: Good
-
 A65: High
 
-Employment Duration
+## Employment Duration
 
 A71: Unemployed
-
 A72: < 1 Year
-
 A73: 1–4 Years
-
 A74: 4–7 Years
-
 A75: > 7 Years
 
-Personal Status
+## Personal Status
 (Gender + marital information encoded)
 
 A91–A95: Married, Single, Divorced, etc.
 
-Other Debtors
+## Other Debtors
 
 A101: None
-
 A102: Co-Applicant
-
 A103: Guarantor
 
-Other Installment Plans
+## Other Installment Plans
 
 A141: Bank
-
 A142: Stores
-
 A143: None
 
-Housing
+## Housing
 
 A151: Rent
-
 A152: Owned
-
 A153: Free / Provided
 
-Job Type
+## Job Type
 
 A171: Unskilled (Non-Resident)
-
 A172: Unskilled (Resident)
-
 A173: Skilled Employee
-
 A174: Highly Skilled / Self-Employed
 
-Telephone: A191 (None), A192 (Has Phone)
+## Telephone: 
+A191 (None), A192 (Has Phone)
 
-Foreign Worker: A201 (Yes), A202 (No)
+## Foreign Worker: 
+A201 (Yes), A202 (No)
 
-Response
+## Response
 {
   "prediction": "Good Credit",
   "probability_good": 0.87,
   "probability_bad": 0.13
 }
 
-🏗 Project Structure
+# 🏗 Project Structure
+
 german-credit-risk-ml/
 ├── api/
 │   ├── main.py
@@ -205,36 +167,31 @@ german-credit-risk-ml/
 ├── data/
 └── requirements.txt
 
-⚙️ Installation
+# ⚙️ Installation
 
 1. Clone the repo
 
 git clone https://github.com/AtharvaKaryakarte2303/german-credit-risk-ml.git
 cd german-credit-risk-ml
 
-
 2. Install dependencies
 
 pip install -r requirements.txt
-
 
 3. Run FastAPI
 
 uvicorn api.main:app --reload
 
-📌 Business Impact
+# 📌 Business Impact
 
 This system helps lenders:
 
 Reduce default rates
-
 Score applicants more accurately
-
 Approve loans faster
-
 Maintain transparent, auditable decisions
 
-🧑‍💻 Author
+# 🧑‍💻 Author
 
 Atharva Anirudha Karyakarte
 ML Engineer — Finance & Risk Modeling
