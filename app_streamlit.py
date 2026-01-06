@@ -8,32 +8,57 @@ model = joblib.load("models/xgb.joblib")
 scaler = joblib.load("models/scaler.joblib")
 label_encoders = joblib.load("models/LabelEncoders.joblib")  # <- dict of encoders
 
+UI_LABELS = {
+    "Duration": "Loan Tenure (Months)",
+    "Credit Amount": "Loan Amount (₹)",
+    "Installment Rate": "EMI Burden Category",
+    "Age": "Applicant Age",
+    "Existing Credits": "Active Loans (Current EMIs)",
+    "Liable Maintaince Provider": "Number of Financial Dependents",
+
+    "Checking Account": "Salary / Primary Bank Account",
+    "Savings Account": "Savings & Bank Balance Behaviour",
+    "Credit History": "Credit Bureau Status",
+    "Purpose": "Loan Purpose",
+    "Present Employment Since": "Employment Stability",
+    "Personal Status and Sex": "Marital Status",
+    "Other Debtors": "Co-applicant / Guarantor",
+    "Property": "Asset Ownership",
+    "Other Installment Plans": "Other Loan Plans",
+    "Housing": "Residence Type",
+    "Job": "Occupation Type",
+    "Telephone": "Phone Availability",
+    "Foreign_Worker": "Resident Status",
+    "Present Residence Since": "Residence Stability (Years)"
+}
+
+
 st.title("💳 German Credit Risk Prediction App")
 st.write("Predict whether a loan applicant has **Good Credit** or **Bad Credit**")
 
 st.header("📋 Applicant Information")
 
-duration = st.number_input("Duration (in months)", 6, 72, 24)
-credit_amount = st.number_input("Credit Amount", 500, 50000, 3500)
-installment_rate = st.number_input("Installment Rate (1–4)", 1, 4, 2)
-age = st.number_input("Age", 18, 75, 35)
-existing_credits = st.number_input("Existing Credits", 1, 4, 1)
-num_dependents = st.number_input("Number of Dependents", 1, 2, 1)
+duration = st.number_input(UI_LABELS["Duration"], 6, 72, 24)
+credit_amount = st.number_input(UI_LABELS["Credit Amount"], 500, 50000, 3500)
+installment_rate = st.number_input(UI_LABELS["Installment Rate"], 1, 4, 2)
+age = st.number_input(UI_LABELS["Age"], 18, 75, 35)
+existing_credits = st.number_input(UI_LABELS["Existing Credits"], 1, 4, 1)
+num_dependents = st.number_input(UI_LABELS["Liable Maintaince Provider"], 1, 2, 1)
 
-checking_account_status = st.selectbox("Checking Account Status", ["A11", "A12", "A13", "A14"])
-savings_account_status = st.selectbox("Savings Account Status", ["A61", "A62", "A63", "A64", "A65"])
-credit_history = st.selectbox("Credit History", ["A30", "A31", "A32", "A33", "A34"])
-purpose = st.selectbox("Purpose", ["A40", "A41", "A42", "A43", "A44", "A45", "A46", "A47", "A48", "A49"])
-employment = st.selectbox("Employment Duration", ["A71", "A72", "A73", "A74", "A75"])
-personal_status = st.selectbox("Personal Status", ["A91", "A92", "A93", "A94"])
-other_debtors = st.selectbox("Other Debtors / Guarantors", ["A101", "A102", "A103"])
-property = st.selectbox("Property", ["A121", "A122", "A123", "A124"])
-other_installment_plans = st.selectbox("Other Installment Plans", ["A141", "A142", "A143"])
-housing = st.selectbox("Housing", ["A151", "A152", "A153"])
-job = st.selectbox("Job", ["A171", "A172", "A173", "A174"])
-telephone = st.selectbox("Telephone", ["A191", "A192"])
-foreign_worker = st.selectbox("Foreign Worker", ["A201", "A202"])
-present_residence_since = st.number_input("Present Residence Since (years)", 1, 4, 3)
+checking_account_status = st.selectbox(UI_LABELS["Checking Account"], ["A11", "A12", "A13", "A14"])
+savings_account_status = st.selectbox(UI_LABELS["Savings Account"], ["A61", "A62", "A63", "A64", "A65"])
+credit_history = st.selectbox(UI_LABELS["Credit History"], ["A30", "A31", "A32", "A33", "A34"])
+purpose = st.selectbox(UI_LABELS["Purpose"], ["A40", "A41", "A42", "A43", "A44", "A45", "A46", "A47", "A48", "A49"])
+employment = st.selectbox(UI_LABELS["Present Employment Since"], ["A71", "A72", "A73", "A74", "A75"])
+personal_status = st.selectbox(UI_LABELS["Personal Status and Sex"], ["A91", "A92", "A93", "A94"])
+other_debtors = st.selectbox(UI_LABELS["Other Debtors"], ["A101", "A102", "A103"])
+property = st.selectbox(UI_LABELS["Property"], ["A121", "A122", "A123", "A124"])
+other_installment_plans = st.selectbox(UI_LABELS["Other Installment Plans"], ["A141", "A142", "A143"])
+housing = st.selectbox(UI_LABELS["Housing"], ["A151", "A152", "A153"])
+job = st.selectbox(UI_LABELS["Job"], ["A171", "A172", "A173", "A174"])
+telephone = st.selectbox(UI_LABELS["Telephone"], ["A191", "A192"])
+foreign_worker = st.selectbox(UI_LABELS["Foreign_Worker"], ["A201", "A202"])
+present_residence_since = st.number_input(UI_LABELS["Present Residence Since"], 1, 4, 3)
 
 # Create input dataframe
 input_data = pd.DataFrame([[
