@@ -6,3 +6,4 @@ scikit-learn
 xgboost
 joblib
 numpy
+streamlit==1.33.0
