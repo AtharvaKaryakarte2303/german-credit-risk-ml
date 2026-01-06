@@ -5,7 +5,7 @@ from api.model_loader import load_model
 from api.schemas import CreditData
 
 # Initialize FastAPI
-app = FastAPI(title="German Credit Risk Prediction API", version="1.0")
+app = FastAPI(title="Indian Credit Risk Assessment API", version="1.0")
 
 # Load trained model, scaler, and label encoders
 model, scaler, le = load_model()
@@ -18,7 +18,7 @@ else:
 
 @app.get("/")
 def root():
-    return {"message": "🚀 German Credit Risk Prediction API is running successfully!"}
+    return {"message": "🚀 Indian Credit Risk Assessment API is running successfully!"}
 
 
 @app.post("/predict")
