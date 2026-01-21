@@ -32,33 +32,211 @@ UI_LABELS = {
     "Present Residence Since": "Residence Stability (Years)"
 }
 
+employment_ui = {
+    "Unemployed / < 1 year": "A71",
+    "1 – 3 years": "A72",
+    "3 – 5 years": "A73",
+    "5 – 10 years": "A74",
+    "10+ years": "A75"
+}
 
-st.title("💳 German Credit Risk Prediction App")
+credit_history_ui = {
+    "New to credit / No previous loans": "A30",
+    "All loans paid on time": "A31",
+    "Existing loans, regular repayment": "A32",
+    "Past delays, but settled": "A33",
+    "Serious past defaults": "A34"
+}
+
+purpose_ui = {
+    "Two-wheeler / Personal use": "A40",
+    "Four-wheeler / Vehicle purchase": "A41",
+    "Education loan": "A42",
+    "Business expansion / Working capital": "A43",
+    "Home improvement / Renovation": "A44",
+    "Consumer durables (TV, fridge, etc.)": "A45",
+    "Medical expenses": "A46",
+    "Travel / Lifestyle": "A47",
+    "Agriculture / Allied activity": "A48",
+    "Other personal needs": "A49"
+}
+
+savings_ui = {
+    "No savings / Low balance": "A61",
+    "< ₹50k balance": "A62",
+    "₹50k – ₹2L balance": "A63",
+    "> ₹2L balance": "A64",
+    "Unknown / Not reported": "A65"
+}
+
+checking_ui = {
+    "No active salary account": "A11",
+    "Low balance / irregular credits": "A12",
+    "Regular salary credits": "A13",
+    "High balance & strong banking history": "A14"
+}
+
+job_ui = {
+    "Salaried (Private / Govt)": "A171",
+    "Self-Employed Professional": "A172",
+    "Business Owner / MSME": "A173",
+    "Daily Wage / Gig / Contract": "A174"
+}
+
+housing_ui = {
+    "Own House / Flat": "A151",
+    "Rented (Registered / Informal)": "A152",
+    "Company / Family Provided": "A153"
+}
+
+property_ui = {
+    "Real Estate (House / Land)": "A121",
+    "Vehicle / Gold / Fixed Assets": "A122",
+    "Savings / Investments / Insurance": "A123",
+    "No Major Assets": "A124"
+}
+
+debtor_ui = {
+    "No Co-applicant / Guarantor": "A101",
+    "Co-applicant Present": "A102",
+    "Guarantor Present": "A103"
+}
+
+installment_ui = {
+    "Low EMI Burden": 1,
+    "Moderate EMI Burden": 2,
+    "High EMI Burden": 3,
+    "Very High EMI Burden": 4
+}
+
+personal_ui = {
+    "Single": "A91",
+    "Married": "A92",
+    "Divorced / Separated": "A93",
+    "Widowed": "A94"
+}
+
+installment_ui = {
+    "None": "A141",
+    "Bank / NBFC Loans": "A142",
+    "Informal / Employer / Others": "A143"
+}
+
+telephone_ui = {
+    "No": "A191",
+    "Yes (Mobile / Landline)": "A192"
+}
+
+resident_ui = {
+    "Indian Resident": "A201",
+    "Non-Resident (NRI / Foreign)": "A202"
+}
+
+st.set_page_config(
+    page_title="Bharat Credit Risk Assessment System",
+    page_icon="🇮🇳",
+    layout="wide"
+)
+
+st.title("🇮🇳 Bharat Credit Risk Assessment System")
+st.caption(
+    "RBI-aligned credit risk evaluation demo for Indian NBFCs, FinTechs, and lending institutions"
+)
+
+st.warning(
+    "⚠️ This is a prototype system for educational and demonstration purposes only. "
+    "It is not an official credit decision engine and should not be used for live lending decisions."
+)
+
 st.write("Predict whether a loan applicant has **Good Credit** or **Bad Credit**")
 
 st.header("📋 Applicant Information")
 
 duration = st.number_input(UI_LABELS["Duration"], 6, 72, 24)
 credit_amount = st.number_input(UI_LABELS["Credit Amount"], 500, 50000, 3500)
-installment_rate = st.number_input(UI_LABELS["Installment Rate"], 1, 4, 2)
+installment_label = st.selectbox(
+    "EMI Burden Category",
+    list(installment_ui.keys())
+)
+installment_rate = installment_ui[installment_label]
 age = st.number_input(UI_LABELS["Age"], 18, 75, 35)
-existing_credits = st.number_input(UI_LABELS["Existing Credits"], 1, 4, 1)
-num_dependents = st.number_input(UI_LABELS["Liable Maintaince Provider"], 1, 2, 1)
+existing_credits = st.number_input(UI_LABELS["Existing Credits"], 0, 5, 1)
+num_dependents = st.number_input(UI_LABELS["Liable Maintaince Provider"], 0, 5, 1)
 
-checking_account_status = st.selectbox(UI_LABELS["Checking Account"], ["A11", "A12", "A13", "A14"])
-savings_account_status = st.selectbox(UI_LABELS["Savings Account"], ["A61", "A62", "A63", "A64", "A65"])
-credit_history = st.selectbox(UI_LABELS["Credit History"], ["A30", "A31", "A32", "A33", "A34"])
-purpose = st.selectbox(UI_LABELS["Purpose"], ["A40", "A41", "A42", "A43", "A44", "A45", "A46", "A47", "A48", "A49"])
-employment = st.selectbox(UI_LABELS["Present Employment Since"], ["A71", "A72", "A73", "A74", "A75"])
-personal_status = st.selectbox(UI_LABELS["Personal Status and Sex"], ["A91", "A92", "A93", "A94"])
-other_debtors = st.selectbox(UI_LABELS["Other Debtors"], ["A101", "A102", "A103"])
-property = st.selectbox(UI_LABELS["Property"], ["A121", "A122", "A123", "A124"])
-other_installment_plans = st.selectbox(UI_LABELS["Other Installment Plans"], ["A141", "A142", "A143"])
-housing = st.selectbox(UI_LABELS["Housing"], ["A151", "A152", "A153"])
-job = st.selectbox(UI_LABELS["Job"], ["A171", "A172", "A173", "A174"])
-telephone = st.selectbox(UI_LABELS["Telephone"], ["A191", "A192"])
-foreign_worker = st.selectbox(UI_LABELS["Foreign_Worker"], ["A201", "A202"])
-present_residence_since = st.number_input(UI_LABELS["Present Residence Since"], 1, 4, 3)
+checking_label = st.selectbox(
+    UI_LABELS["Checking Account"],
+    list(checking_ui.keys())
+)
+
+checking_account_status = checking_ui[checking_label]
+savings_label = st.selectbox(
+    UI_LABELS["Savings Account"],
+    list(savings_ui.keys())
+)
+
+savings_account_status = savings_ui[savings_label]
+credit_history_label = st.selectbox(
+    UI_LABELS["Credit History"],
+    list(credit_history_ui.keys())
+)
+credit_history = credit_history_ui[credit_history_label]
+purpose_label = st.selectbox(
+    UI_LABELS["Purpose"],
+    list(purpose_ui.keys())
+)
+
+purpose = purpose_ui[purpose_label]
+employment_label = st.selectbox(
+    "Employment Stability",
+    list(employment_ui.keys())
+)
+
+employment = employment_ui[employment_label]
+ersonal_label = st.selectbox(
+    UI_LABELS["Personal Status and Sex"],
+    list(personal_ui.keys())
+)
+
+personal_status = personal_ui[personal_label]
+other_debtors = debtor_ui[
+    st.selectbox(UI_LABELS["Other Debtors"], debtor_ui.keys())
+]
+other_debtors = other_debtors_ui[other_debtors_label]
+property_label = st.selectbox(
+    UI_LABELS["Property"],
+    list(property_ui.keys())
+)
+
+property = property_ui[property_label]
+other_installment_plans_label = installment_ui[
+    st.selectbox(UI_LABELS["Other Installment Plans"], installment_ui.keys())
+]
+other_installment_plans = installment_ui[other_installment_plans_label]
+
+housing_label = st.selectbox(
+    UI_LABELS["Housing"],
+    list(housing_ui.keys())
+)
+
+housing = housing_ui[housing_label]
+job_label = st.selectbox(
+    UI_LABELS["Job"],
+    list(job_ui.keys())
+)
+
+job = job_ui[job_label]
+telephoneLabel = telephone_ui[
+    st.selectbox(UI_LABELS["Telephone"], telephone_ui.keys())
+]
+telephone = telephone_ui[telephoneLabel]
+foreign_worker_label = resident_ui[
+    st.selectbox("Resident Status", resident_ui.keys())
+]
+foreign_worker = resident_ui[foreign_worker_label]
+present_residence_since = st.selectbox(
+    "Years at Current Residence",
+    ["< 1 year", "1 – 3 years", "3 – 5 years", "5+ years"]
+)
 
 # Create input dataframe
 input_data = pd.DataFrame([[
@@ -98,7 +276,7 @@ if st.button("🔍 Predict Credit Risk"):
     result = "✅ Good Credit" if prediction == 1 else "❌ Bad Credit"
     confidence = max(good_prob, bad_prob) * 100
 
-    st.subheader(f"Prediction: {result}")
+    st.subheader("📊 Credit Risk Evaluation Result")
     st.write(f"**Good Credit Probability:** {good_prob:.2%}")
     st.write(f"**Bad Credit Probability:** {bad_prob:.2%}")
     st.write(f"**Confidence:** {confidence:.2f}%")
