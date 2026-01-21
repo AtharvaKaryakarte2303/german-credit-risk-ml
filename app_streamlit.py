@@ -192,7 +192,7 @@ employment_label = st.selectbox(
 )
 
 employment = employment_ui[employment_label]
-ersonal_label = st.selectbox(
+personal_label = st.selectbox(
     UI_LABELS["Personal Status and Sex"],
     list(personal_ui.keys())
 )
