@@ -199,7 +199,7 @@ personal_label = st.selectbox(
 
 personal_status = personal_ui[personal_label]
 other_debtors_label = debtor_ui[
-    st.selectbox(UI_LABELS["Other Debtors"], debtor_ui.keys())
+    st.selectbox(UI_LABELS["Other Debtors"], list(debtor_ui.keys()))
 ]
 other_debtors = debtor_ui[other_debtors_label]
 property_label = st.selectbox(
