@@ -198,9 +198,8 @@ personal_label = st.selectbox(
 )
 
 personal_status = personal_ui[personal_label]
-other_debtors_label = debtor_ui[
-    st.selectbox(UI_LABELS["Other Debtors"], list(debtor_ui.keys()))
-]
+other_debtors_label = st.selectbox(UI_LABELS["Other Debtors"], list(debtor_ui.keys()))
+
 other_debtors = debtor_ui[other_debtors_label]
 property_label = st.selectbox(
     UI_LABELS["Property"],
@@ -208,9 +207,8 @@ property_label = st.selectbox(
 )
 
 property = property_ui[property_label]
-other_installment_plans_label = installment_ui[
-    st.selectbox(UI_LABELS["Other Installment Plans"], installment_ui.keys())
-]
+other_installment_plans_label = st.selectbox(UI_LABELS["Other Installment Plans"], installment_ui.keys())
+
 other_installment_plans = installment_ui[other_installment_plans_label]
 
 housing_label = st.selectbox(
@@ -225,13 +223,11 @@ job_label = st.selectbox(
 )
 
 job = job_ui[job_label]
-telephoneLabel = telephone_ui[
-    st.selectbox(UI_LABELS["Telephone"], telephone_ui.keys())
-]
+telephoneLabel = st.selectbox(UI_LABELS["Telephone"], list(telephone_ui.keys()))
+
 telephone = telephone_ui[telephoneLabel]
-foreign_worker_label = resident_ui[
-    st.selectbox("Resident Status", resident_ui.keys())
-]
+foreign_worker_label = st.selectbox("Resident Status", list(resident_ui.keys()))
+
 foreign_worker = resident_ui[foreign_worker_label]
 present_residence_since = st.selectbox(
     "Years at Current Residence",
