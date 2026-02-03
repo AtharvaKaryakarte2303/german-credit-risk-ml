@@ -250,16 +250,16 @@ input_data = pd.DataFrame([[
 CATEGORICAL_COLS = label_encoders.keys()
 if st.button("🔍 Predict Credit Risk"):
     # Encode categorical columns using the saved label encoders
-for col in label_encoders.keys():
-    if col in input_data.columns:
-        encoder = label_encoders[col]
-        val = input_data.at[0, col]
-
-        if val in encoder.classes_:
-            input_data.at[0, col] = int(encoder.transform([val])[0])
-        else:
-            st.error(f"Unseen category '{val}' in column '{col}'")
-            st.stop()
+    for col in label_encoders.keys():
+        if col in input_data.columns:
+            encoder = label_encoders[col]
+            val = input_data.at[0, col]
+    
+            if val in encoder.classes_:
+                input_data.at[0, col] = int(encoder.transform([val])[0])
+            else:
+                st.error(f"Unseen category '{val}' in column '{col}'")
+                st.stop()
 
     # Scale numeric data
     input_scaled = scaler.transform(input_data)
