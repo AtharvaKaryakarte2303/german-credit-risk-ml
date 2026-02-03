@@ -243,7 +243,7 @@ input_data = pd.DataFrame([[
 ]], columns=[
     'Checking Account', 'Duration', 'Credit History', 'Purpose', 'Credit Amount',
     'Savings Account', 'Present Employment Since', 'Installment Rate', 'Personal Status and Sex',
-    'Other Debtors', 'Present Residence Since', 'Property', 'Age', 'Other Installment plans',
+    'Other Debtors', 'Present Residence Since', 'Property', 'Age', 'Other Installment Plans',
     'Housing', 'Existing Credits', 'Job', 'Liable Maintaince Provider', 'Telephone', 'Foreign_Worker'
 ])
 
