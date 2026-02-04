@@ -132,6 +132,13 @@ resident_ui = {
     "Non-Resident (NRI / Foreign)": "A202"
 }
 
+present_residence_ui = {
+    "< 1 year": 1,
+    "1 – 3 years": 2,
+    "3 – 5 years": 3,
+    "5+ years": 4
+}
+
 st.set_page_config(
     page_title="Bharat Credit Risk Assessment System",
     page_icon="🇮🇳",
@@ -229,10 +236,12 @@ telephone = telephone_ui[telephoneLabel]
 foreign_worker_label = st.selectbox("Resident Status", list(resident_ui.keys()))
 
 foreign_worker = resident_ui[foreign_worker_label]
-present_residence_since = st.selectbox(
-    "Years at Current Residence",
-    ["< 1 year", "1 – 3 years", "3 – 5 years", "5+ years"]
+present_residence_label = st.selectbox(
+    UI_LABELS["Present Residence Since"],
+    list(present_residence_ui.keys())
 )
+
+present_residence_since = present_residence_ui[present_residence_label]
 
 # Create input dataframe
 input_data = pd.DataFrame([[
