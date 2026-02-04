@@ -102,7 +102,7 @@ debtor_ui = {
     "Guarantor Present": "A103"
 }
 
-installment_ui = {
+emi_ui = {
     "Low EMI Burden": 1,
     "Moderate EMI Burden": 2,
     "High EMI Burden": 3,
@@ -116,7 +116,7 @@ personal_ui = {
     "Widowed": "A94"
 }
 
-installment_ui = {
+other_installment_ui = {
     "None": "A141",
     "Bank / NBFC Loans": "A142",
     "Informal / Employer / Others": "A143"
@@ -154,11 +154,11 @@ st.header("📋 Applicant Information")
 
 duration = st.number_input(UI_LABELS["Duration"], 6, 72, 24)
 credit_amount = st.number_input(UI_LABELS["Credit Amount"], 500, 50000, 3500)
-installment_label = st.selectbox(
+emi_label = st.selectbox(
     "EMI Burden Category",
-    list(installment_ui.keys())
+    list(emi_ui.keys())
 )
-installment_rate = installment_ui[installment_label]
+installment_rate = emi_ui[emi_label]
 age = st.number_input(UI_LABELS["Age"], 18, 75, 35)
 existing_credits = st.number_input(UI_LABELS["Existing Credits"], 0, 5, 1)
 num_dependents = st.number_input(UI_LABELS["Liable Maintaince Provider"], 0, 5, 1)
@@ -207,9 +207,9 @@ property_label = st.selectbox(
 )
 
 property = property_ui[property_label]
-other_installment_plans_label = st.selectbox(UI_LABELS["Other Installment Plans"], installment_ui.keys())
+other_installment_plans_label = st.selectbox(UI_LABELS["Other Installment Plans"], other_installment_ui.keys())
 
-other_installment_plans = installment_ui[other_installment_plans_label]
+other_installment_plans = other_installment_ui[other_installment_plans_label]
 
 housing_label = st.selectbox(
     UI_LABELS["Housing"],
