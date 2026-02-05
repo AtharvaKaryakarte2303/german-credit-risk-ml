@@ -283,7 +283,21 @@ if st.button("🔍 Predict Credit Risk"):
     result = "✅ Good Credit" if prediction == 1 else "❌ Bad Credit"
     confidence = max(good_prob, bad_prob) * 100
 
+    if good_prob >= 70:
+        risk_band = "🟢 Low Risk"
+    elif good_prob >= 55:
+        risk_band = "🟡 Medium Risk"
+    else:
+        risk_band = "🔴 High Risk"
+        
     st.subheader("📊 Credit Risk Evaluation Result")
-    st.write(f"**Good Credit Probability:** {good_prob:.2%}")
-    st.write(f"**Bad Credit Probability:** {bad_prob:.2%}")
-    st.write(f"**Confidence:** {confidence:.2f}%")
+
+    st.write(f"Good Credit Probability: {good_prob:.2f}%")
+    st.write(f"Bad Credit Probability: {bad_prob:.2f}%")
+    st.write(f"Model Confidence: {confidence:.2f}%")
+    
+    st.subheader(f"Risk Category: {risk_band}")
+    st.caption(
+    "⚠️ AI-assisted assessment. Final lending decisions should involve human review."
+    )
+
