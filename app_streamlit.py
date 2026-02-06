@@ -281,7 +281,7 @@ if st.button("🔍 Predict Credit Risk"):
     good_prob = probs[1] * 100
     confidence = max(bad_prob, good_prob)
 
-    result = "✅ Good Credit" if prediction == 1 else "❌ Bad Credit
+    result = "✅ Good Credit" if prediction == 1 else "❌ Bad Credit"
 
     if good_prob >= 70:
         risk_band = "🟢 Low Risk (Likely Approve)"
