@@ -155,7 +155,7 @@ st.warning(
     "It is not an official credit decision engine and should not be used for live lending decisions."
 )
 
-st.write("Predict whether a loan applicant has **Good Credit** or **Bad Credit**")
+st.write("AI-assisted estimation of applicant creditworthiness")
 
 st.header("📋 Applicant Information")
 
@@ -284,11 +284,11 @@ if st.button("🔍 Predict Credit Risk"):
     result = "✅ Good Credit" if prediction == 1 else "❌ Bad Credit
 
     if good_prob >= 70:
-        risk_band = "🟢 Low Risk"
+        risk_band = "🟢 Low Risk (Likely Approve)"
     elif good_prob >= 55:
-        risk_band = "🟡 Medium Risk"
+        risk_band = "🟡 Medium Risk (Manual Review)"
     else:
-        risk_band = "🔴 High Risk"
+        risk_band = "🔴 High Risk (Likely Reject)"
         
     st.subheader("📊 Credit Risk Evaluation Result")
 
@@ -297,6 +297,37 @@ if st.button("🔍 Predict Credit Risk"):
     st.write(f"Model Confidence: {confidence:.2f}%")
     
     st.subheader(f"Risk Category: {risk_band}")
+
+    st.subheader("🔍 Key Risk Signals Detected")
+
+    risk_factors = []
+    
+    # Employment stability
+    if employment in ["A172", "A173"]:
+        risk_factors.append("Unstable employment history")
+    
+    # Savings behavior
+    if savings_account_status in ["A61", "A62"]:
+        risk_factors.append("Low or no savings balance")
+    
+    # Credit history
+    if credit_history in ["A30", "A31"]:
+        risk_factors.append("Thin or no credit history")
+    
+    # Residence stability
+    if present_residence_since in ["A151"]:  # < 1 year
+        risk_factors.append("Low residence stability")
+    
+    # Telephone availability
+    if telephone == "A191":
+        risk_factors.append("No registered telephone contact")
+    
+    # Fallback
+    if not risk_factors:
+        st.write("No major risk signals detected.")
+    else:
+        for r in risk_factors:
+            st.write("•", r)
     st.caption(
     "⚠️ AI-assisted assessment. Final lending decisions should involve human review."
     )
