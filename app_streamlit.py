@@ -274,14 +274,14 @@ if st.button("🔍 Predict Credit Risk"):
     input_scaled = scaler.transform(input_data)
 
     # Predict
-    prediction_proba = model.predict_proba(input_scaled)[0]
     prediction = model.predict(input_scaled)[0]
+    probs = model.predict_proba(input_scaled)[0]
 
-    good_prob = prediction_proba[1]
-    bad_prob = prediction_proba[0]
+    bad_prob = probs[0] * 100
+    good_prob = probs[1] * 100
+    confidence = max(bad_prob, good_prob)
 
-    result = "✅ Good Credit" if prediction == 1 else "❌ Bad Credit"
-    confidence = max(good_prob, bad_prob) * 100
+    result = "✅ Good Credit" if prediction == 1 else "❌ Bad Credit
 
     if good_prob >= 70:
         risk_band = "🟢 Low Risk"
