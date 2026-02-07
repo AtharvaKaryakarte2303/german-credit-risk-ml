@@ -283,12 +283,12 @@ if st.button("🔍 Predict Credit Risk"):
 
     result = "✅ Good Credit" if prediction == 1 else "❌ Bad Credit"
 
-    if good_prob >= 70:
-        risk_band = "🟢 Low Risk (Likely Approve)"
-    elif good_prob >= 55:
-        risk_band = "🟡 Medium Risk (Manual Review)"
-    else:
+    if bad_prob >= 60 or len(risk_factors) >= 3:
         risk_band = "🔴 High Risk (Likely Reject)"
+    elif bad_prob >= 40:
+        risk_band = "🟠 Medium Risk (Manual Review)"
+    else:
+        risk_band = "🟢 Low Risk (Likely Approve)"
         
     st.subheader("📊 Credit Risk Evaluation Result")
 
@@ -328,6 +328,11 @@ if st.button("🔍 Predict Credit Risk"):
     else:
         for r in risk_factors:
             st.write("•", r)
+
+    st.info(
+    "Risk category is determined using both model probability and rule-based risk indicators, "
+    "similar to underwriting practices used by Indian lenders."
+    )
     st.caption(
     "⚠️ AI-assisted assessment. Final lending decisions should involve human review."
     )
