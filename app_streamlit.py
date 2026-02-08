@@ -283,23 +283,6 @@ if st.button("🔍 Predict Credit Risk"):
 
     result = "✅ Good Credit" if prediction == 1 else "❌ Bad Credit"
 
-    if bad_prob >= 60 or len(risk_factors) >= 3:
-        risk_band = "🔴 High Risk (Likely Reject)"
-    elif bad_prob >= 40:
-        risk_band = "🟠 Medium Risk (Manual Review)"
-    else:
-        risk_band = "🟢 Low Risk (Likely Approve)"
-        
-    st.subheader("📊 Credit Risk Evaluation Result")
-
-    st.write(f"Good Credit Probability: {good_prob:.2f}%")
-    st.write(f"Bad Credit Probability: {bad_prob:.2f}%")
-    st.write(f"Model Confidence: {confidence:.2f}%")
-    
-    st.subheader(f"Risk Category: {risk_band}")
-
-    st.subheader("🔍 Key Risk Signals Detected")
-
     risk_factors = []
     
     # Employment stability
@@ -321,6 +304,23 @@ if st.button("🔍 Predict Credit Risk"):
     # Telephone availability
     if telephone == "A191":
         risk_factors.append("No registered telephone contact")
+
+    if bad_prob >= 60 or len(risk_factors) >= 3:
+        risk_band = "🔴 High Risk (Likely Reject)"
+    elif bad_prob >= 40:
+        risk_band = "🟠 Medium Risk (Manual Review)"
+    else:
+        risk_band = "🟢 Low Risk (Likely Approve)"
+        
+    st.subheader("📊 Credit Risk Evaluation Result")
+
+    st.write(f"Good Credit Probability: {good_prob:.2f}%")
+    st.write(f"Bad Credit Probability: {bad_prob:.2f}%")
+    st.write(f"Model Confidence: {confidence:.2f}%")
+    
+    st.subheader(f"Risk Category: {risk_band}")
+
+    st.subheader("🔍 Key Risk Signals Detected")
     
     # Fallback
     if not risk_factors:
