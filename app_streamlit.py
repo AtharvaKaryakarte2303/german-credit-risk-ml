@@ -320,6 +320,8 @@ if st.button("🔍 Predict Credit Risk"):
     
     st.subheader(f"Risk Category: {risk_band}")
 
+    st.write("Model score is borderline; policy rules triggered a high-risk classification.");
+    
     st.subheader("🔍 Key Risk Signals Detected")
     
     # Fallback
